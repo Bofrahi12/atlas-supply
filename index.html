@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATLAS SUPPLY — Wear The Motion</title>
+<meta name="description" content="ATLAS SUPPLY — premium heavyweight apparel. Hoodies, tees, caps and carry, built to move.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#111110;--paper:#f4f1ea;--sand:#d8cfc0;--accent:#c8501e;--mut:#6d6a63;--line:#ddd6c9}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden}
+h1,h2,h3,.disp{font-family:'Archivo',sans-serif;text-transform:uppercase;line-height:.95;letter-spacing:-.01em}
+img{display:block;max-width:100%}
+button{font-family:inherit;cursor:pointer}
+::selection{background:var(--accent);color:#fff}
+/* grain + cursor + progress */
+#grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:200;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:gr 7s steps(8) infinite}
+@keyframes gr{0%,100%{transform:translate(0,0)}25%{transform:translate(-2%,1%)}50%{transform:translate(1%,-2%)}75%{transform:translate(-1%,2%)}}
+#sprog{position:fixed;top:0;left:0;height:3px;background:var(--accent);width:0;z-index:300}
+#cur,#curR{position:fixed;top:0;left:0;pointer-events:none;z-index:400;border-radius:50%;display:none}
+@media(pointer:fine){#cur{display:block;width:8px;height:8px;background:var(--accent)}#curR{display:block;width:36px;height:36px;border:1.5px solid rgba(200,80,30,.55);transition:width .25s,height .25s}}
+/* preloader */
+#loader{position:fixed;inset:0;background:var(--ink);z-index:500;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--paper);transition:transform .9s cubic-bezier(.76,0,.24,1)}
+#loader.done{transform:translateY(-101%)}
+#loader .lg{font-family:'Archivo';font-weight:900;font-size:clamp(2rem,7vw,4rem);letter-spacing:.02em}
+#loader .pc{font-family:'Archivo';font-weight:800;font-size:1rem;color:var(--accent);margin-top:.6rem}
+/* nav */
+header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem clamp(1rem,4vw,2.5rem);mix-blend-mode:difference;color:#fff}
+header .logo{font-family:'Archivo';font-weight:900;font-size:1.25rem;letter-spacing:.03em;color:#fff;text-decoration:none}
+header nav{display:flex;gap:1.6rem}
+header nav a{color:#fff;text-decoration:none;font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+#cartBtn{background:#fff;color:#000;border:none;border-radius:999px;padding:.55rem 1.1rem;font-weight:700;font-size:.8rem;letter-spacing:.08em}
+#cartBtn b{background:var(--accent);color:#fff;border-radius:50%;padding:.05rem .42rem;margin-left:.35rem}
+@media(max-width:640px){header nav{display:none}}
+/* hero */
+.hero{min-height:100svh;display:grid;grid-template-columns:1.15fr .85fr;align-items:end;padding:7rem clamp(1rem,4vw,2.5rem) 0;position:relative;overflow:hidden}
+.hero h1{font-size:clamp(3.2rem,10.5vw,9.5rem);font-weight:900}
+.hero h1 .row{display:block;overflow:hidden}
+.hero h1 .row span{display:inline-block;transform:translateY(110%);animation:up 1s cubic-bezier(.2,.7,.2,1) forwards}
+.hero h1 .row:nth-child(2) span{animation-delay:.12s;color:transparent;-webkit-text-stroke:2px var(--ink)}
+.hero h1 .row:nth-child(3) span{animation-delay:.24s}
+@keyframes up{to{transform:translateY(0)}}
+.hero .sub{max-width:44ch;color:var(--mut);margin:1.4rem 0 2rem;font-size:1.02rem;line-height:1.6}
+.btn{display:inline-block;background:var(--ink);color:var(--paper);border:none;padding:1rem 2rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.85rem;border-radius:999px;transition:.3s;text-decoration:none}
+.btn:hover{background:var(--accent);transform:translateY(-2px)}
+.btn.acc{background:var(--accent)}.btn.acc:hover{background:var(--ink)}
+.heroFig{position:relative;height:min(78svh,760px)}
+.heroFig .card{position:absolute;inset:0 0 8% 6%;border-radius:22px;overflow:hidden;box-shadow:0 40px 80px rgba(17,17,16,.25);will-change:transform}
+.heroFig img{width:100%;height:100%;object-fit:cover}
+.heroFig .tag{position:absolute;bottom:2%;left:0;background:var(--accent);color:#fff;font-family:'Archivo';font-weight:800;padding:.7rem 1.2rem;border-radius:12px;transform:rotate(-4deg);font-size:.95rem;z-index:2}
+@media(max-width:860px){.hero{grid-template-columns:1fr;padding-top:6rem}.heroFig{height:56svh;margin-top:2rem}}
+/* marquee */
+.marq{background:var(--ink);color:var(--paper);overflow:hidden;padding:.9rem 0;transform:rotate(-1.2deg) scale(1.02)}
+.marq .tr{display:flex;gap:0;width:max-content;animation:mq 22s linear infinite;font-family:'Archivo';font-weight:800;font-size:1.05rem;letter-spacing:.06em;white-space:nowrap}
+.marq span{padding:0 1.4rem}.marq i{color:var(--accent);font-style:normal}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* sections */
+.sec{padding:clamp(4rem,9vw,7.5rem) clamp(1rem,4vw,2.5rem)}
+.kick{color:var(--accent);font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:.75rem}
+.sec h2{font-size:clamp(2.2rem,6vw,4.6rem);font-weight:900;margin:.5rem 0 1rem}
+.sec .lead{color:var(--mut);max-width:52ch;line-height:1.65}
+/* pinned horizontal rail */
+#railWrap{height:340vh;position:relative}
+#railPin{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;background:var(--ink);color:var(--paper)}
+#railPin .head{padding:0 clamp(1rem,4vw,2.5rem);display:flex;justify-content:space-between;align-items:end;gap:1rem;flex-wrap:wrap}
+#railPin h2{font-size:clamp(2rem,5.5vw,4.2rem);font-weight:900}
+#railPin .kick{color:#ff8a50}
+#railTrack{display:flex;gap:1.4rem;padding:2.2rem clamp(1rem,4vw,2.5rem) 1rem;width:max-content;will-change:transform}
+.rcard{width:min(74vw,340px);flex:none;background:#1c1c1a;border:1px solid #2c2c29;border-radius:20px;overflow:hidden}
+.rcard .ph{height:300px;overflow:hidden}
+.rcard img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.rcard:hover img{transform:scale(1.06)}
+.rcard .in{padding:1.1rem 1.2rem 1.3rem}
+.rcard h3{font-size:1.15rem;font-weight:800}
+.rcard .p{display:flex;justify-content:space-between;align-items:center;margin-top:.5rem}
+.rcard .price{font-family:'Archivo';font-weight:800;font-size:1.1rem}
+.rcard .old{color:#8b887f;text-decoration:line-through;font-size:.85rem;margin-right:.4rem}
+.add{background:var(--paper);color:var(--ink);border:none;border-radius:999px;padding:.55rem 1.05rem;font-weight:700;font-size:.78rem;letter-spacing:.05em;transition:.25s}
+.add:hover{background:var(--accent);color:#fff}
+.rcard.intro{background:var(--accent);display:flex;flex-direction:column;justify-content:center;padding:2rem}
+.rcard.intro h3{font-size:2rem;color:#fff}
+.rcard.intro p{color:#ffe3d3;margin-top:.7rem;line-height:1.55}
+.rcard.intro .save{font-family:'Archivo';font-weight:900;font-size:2.6rem;color:#fff;margin-top:1.2rem}
+#railBarWrap{margin:1.4rem clamp(1rem,4vw,2.5rem) 0;height:4px;background:#2c2c29;border-radius:99px}
+#railBar{height:100%;width:0;background:var(--accent);border-radius:99px}
+/* collection grid */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem;margin-top:2.6rem}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden;will-change:transform;opacity:0}
+.pcard .ph{height:min(58vw,480px);overflow:hidden;position:relative}
+.pcard img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.pcard:hover img{transform:scale(1.07) rotate(1deg)}
+.pcard .badge{position:absolute;top:1rem;left:1rem;background:var(--ink);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.14em;padding:.4rem .7rem;border-radius:99px;text-transform:uppercase}
+.pcard .in{padding:1.3rem 1.4rem 1.5rem}
+.pcard h3{font-size:1.35rem;font-weight:800}
+.pcard .col{color:var(--mut);font-size:.9rem;margin-top:.25rem}
+.pcard .row{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;flex-wrap:wrap;gap:.8rem}
+.pcard .price{font-family:'Archivo';font-weight:900;font-size:1.4rem}
+.sizes{display:flex;gap:.4rem}
+.sizes button{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:.42rem .6rem;font-weight:600;font-size:.8rem}
+.sizes button.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.addB{background:var(--ink);color:#fff;border:none;border-radius:999px;padding:.8rem 1.5rem;font-weight:700;letter-spacing:.06em;transition:.25s}
+.addB:hover{background:var(--accent)}
+/* lookbook */
+.look{background:var(--sand);overflow:hidden}
+.lookRow{display:flex;gap:1.4rem;margin-top:2.4rem}
+.lookRow figure{flex:1;border-radius:22px;overflow:hidden;height:min(70vw,560px);position:relative}
+.lookRow img{width:100%;height:118%;object-fit:cover;will-change:transform}
+.lookRow figcaption{position:absolute;bottom:1.1rem;left:1.1rem;background:rgba(17,17,16,.85);color:#fff;padding:.55rem 1rem;border-radius:99px;font-weight:600;font-size:.82rem}
+@media(max-width:760px){.lookRow{flex-direction:column}.lookRow figure{height:64vw}}
+.giant{font-family:'Archivo';font-weight:900;font-size:clamp(3rem,11vw,10rem);color:transparent;-webkit-text-stroke:1.5px rgba(17,17,16,.35);white-space:nowrap;will-change:transform;line-height:1}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center}
+@media(max-width:640px){.stats{grid-template-columns:1fr}}
+.stat b{font-family:'Archivo';font-weight:900;font-size:clamp(2.4rem,6vw,4.2rem);display:block}
+.stat span{color:var(--mut);letter-spacing:.14em;text-transform:uppercase;font-size:.75rem;font-weight:600}
+/* cta + footer */
+.cta{background:var(--ink);color:var(--paper);text-align:center}
+.cta h2{font-size:clamp(2.2rem,6.5vw,5rem)}
+.cta p{color:#a49f93;margin:1rem auto 2rem;max-width:46ch;line-height:1.6}
+.cta form{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+.cta input{padding:1rem 1.3rem;border-radius:999px;border:1px solid #3a3a36;background:#1c1c1a;color:#fff;min-width:min(320px,80vw);font-size:1rem}
+.cta .ok{color:#7ee2a0;font-weight:600;margin-top:1rem;display:none}
+footer{padding:2.2rem clamp(1rem,4vw,2.5rem);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--mut);font-size:.85rem;border-top:1px solid var(--line)}
+/* cart drawer */
+#scrim{position:fixed;inset:0;background:rgba(10,10,10,.55);z-index:290;opacity:0;pointer-events:none;transition:.35s}
+#scrim.on{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;right:0;height:100dvh;width:min(420px,92vw);background:#fff;z-index:295;transform:translateX(105%);transition:transform .5s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column}
+#drawer.on{transform:none}
+#drawer .dh{padding:1.3rem 1.4rem;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+#drawer .dh h3{font-size:1.2rem}
+#drawer .dx{background:none;border:none;font-size:1.4rem}
+#items{flex:1;overflow:auto;padding:1rem 1.4rem}
+.ci{display:flex;gap:.9rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
+.ci img{width:64px;height:84px;object-fit:cover;border-radius:10px}
+.ci h4{font-size:.95rem}
+.ci .sz{color:var(--mut);font-size:.8rem}
+.ci .qty{display:flex;gap:.5rem;align-items:center;margin-top:.45rem}
+.ci .qty button{width:26px;height:26px;border-radius:8px;border:1.5px solid var(--line);background:#fff;font-weight:700}
+.ci .pr{margin-left:auto;font-family:'Archivo';font-weight:800}
+.ci .rm{background:none;border:none;color:var(--accent);font-size:.78rem;font-weight:600;margin-top:.3rem}
+#drawer .df{padding:1.2rem 1.4rem;border-top:1px solid var(--line)}
+#drawer .tot{display:flex;justify-content:space-between;font-family:'Archivo';font-weight:900;font-size:1.25rem;margin-bottom:1rem}
+#checkout{width:100%;padding:1.05rem;font-size:.95rem}
+.empty{color:var(--mut);text-align:center;padding:2.5rem 0}
+.rv{opacity:0;transform:translateY(36px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.pcard,.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="grain"></div><div id="sprog"></div><div id="cur"></div><div id="curR"></div>
+
+<div id="loader"><div class="lg">ATLAS SUPPLY</div><div class="pc" id="loadPc">0%</div></div>
+
+<header>
+  <a class="logo" href="#">ATLAS&nbsp;SUPPLY</a>
+  <nav><a href="#pack">The Pack</a><a href="#collection">Collection</a><a href="#lookbook">Lookbook</a></nav>
+  <button id="cartBtn" aria-label="Open bag">BAG <b id="cartCount">0</b></button>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>
+      <span class="row"><span>Wear</span></span>
+      <span class="row"><span>The</span></span>
+      <span class="row"><span>Motion.</span></span>
+    </h1>
+    <p class="sub">Heavyweight essentials engineered to move with you — 480 GSM hoodies, boxy tees, technical carry. Scroll and watch the collection slide, spin and snap into place.</p>
+    <a class="btn acc" href="#pack">Shop the pack</a>
+    <a class="btn" href="#collection" style="margin-left:.5rem">Collection</a>
+  </div>
+  <div class="heroFig">
+    <div class="card" id="heroCard"><img src="img/hoodie.jpg" alt="Heavyweight hoodie in noir"></div>
+    <div class="tag">HEAVYWEIGHT HOODIE — $85</div>
+  </div>
+</section>
+
+<div class="marq" aria-hidden="true"><div class="tr" id="marqTr"></div></div>
+
+<!-- PINNED HORIZONTAL RAIL -->
+<div id="railWrap">
+  <section id="railPin">
+    <div class="head">
+      <div><div class="kick">Bundle &amp; save</div><h2 id="pack">The Performance Pack</h2></div>
+      <p style="color:#a49f93;max-width:34ch;line-height:1.55">Keep scrolling — the pack rolls sideways. Four essentials, one price.</p>
+    </div>
+    <div id="railTrack"></div>
+    <div id="railBarWrap"><div id="railBar"></div></div>
+  </section>
+</div>
+
+<!-- COLLECTION GRID -->
+<section class="sec" id="collection">
+  <div class="kick rv">New drop — FW26</div>
+  <h2 class="rv">Apparel Collection</h2>
+  <p class="lead rv">Every piece is cut boxy, sewn heavy and shot on real bodies. Cards glide in from both sides and settle with a spin — just like the reel.</p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- LOOKBOOK -->
+<section class="sec look" id="lookbook">
+  <div class="kick rv">Lookbook</div>
+  <h2 class="rv">Shot on the move</h2>
+  <div class="lookRow">
+    <figure class="rv"><img data-para src="img/tee.jpg" alt="Boxy tee lookbook"><figcaption>Boxy Tee — Bone White</figcaption></figure>
+    <figure class="rv"><img data-para src="img/bag.jpg" alt="Transit duffel lookbook"><figcaption>Transit Duffel — 28L</figcaption></figure>
+  </div>
+  <div class="giant" id="giant" style="margin-top:2.6rem">ATLAS SUPPLY — EST. 2026 — ATLAS SUPPLY —</div>
+</section>
+
+<!-- STATS -->
+<section class="sec">
+  <div class="stats">
+    <div class="stat rv"><b data-count="480">0</b><span>GSM hoodie fabric</span></div>
+    <div class="stat rv"><b data-count="32">0</b><span>Countries shipped</span></div>
+    <div class="stat rv"><b data-count="98">0</b><span>% would buy again</span></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec cta">
+  <h2 class="rv">Get 10% off<br>your first order</h2>
+  <p class="rv">Join the drop list. Early access to every release, no spam — just heat.</p>
+  <form id="nlForm" class="rv" novalidate>
+    <input type="email" id="nlMail" placeholder="your@email.com" aria-label="Email">
+    <button class="btn acc" type="submit">Join</button>
+  </form>
+  <div class="ok" id="nlOk">You're in — check your inbox for the code.</div>
+</section>
+
+<footer>
+  <span><strong style="color:var(--ink)">ATLAS SUPPLY</strong> — demo storefront concept. Prices and products are illustrative.</span>
+  <span>Free shipping over $75 · 30-day returns</span>
+</footer>
+
+<div id="scrim"></div>
+<aside id="drawer" aria-label="Shopping bag">
+  <div class="dh"><h3>Your Bag</h3><button class="dx" id="drawerX" aria-label="Close">×</button></div>
+  <div id="items"></div>
+  <div class="df">
+    <div class="tot"><span>Total</span><span id="totVal">$0</span></div>
+    <button class="btn acc" id="checkout">Checkout</button>
+    <p id="coMsg" style="color:var(--mut);font-size:.82rem;margin-top:.7rem;text-align:center"></p>
+  </div>
+</aside>
+
+<script>
+const PRODUCTS=[
+ {id:'hoodie',name:'Heavyweight Hoodie',col:'Noir — 480 GSM',price:85,img:'img/hoodie.jpg',badge:'Best seller',sizes:['S','M','L','XL']},
+ {id:'tee',name:'Boxy Tee',col:'Bone White — 240 GSM',price:45,img:'img/tee.jpg',badge:'New',sizes:['S','M','L','XL']},
+ {id:'cap',name:'5-Panel Cap',col:'Sand — brushed twill',price:32,img:'img/cap.jpg',badge:'Back in stock',sizes:['OS']},
+ {id:'bag',name:'Transit Duffel 28L',col:'Black — ballistic nylon',price:95,img:'img/bag.jpg',badge:'Limited',sizes:['OS']},
+];
+const PACK_PRICE=199, PACK_OLD=PRODUCTS.reduce((s,p)=>s+p.price,0);
+/* ---------- loader (real image preload %) ---------- */
+const allImgs=[...new Set([...PRODUCTS.map(p=>p.img),'img/hoodie.jpg'])];
+let loaded=0;const pc=document.getElementById('loadPc');
+function bump(){loaded++;pc.textContent=Math.round(loaded/allImgs.length*100)+'%';if(loaded>=allImgs.length)setTimeout(()=>document.getElementById('loader').classList.add('done'),250)}
+allImgs.forEach(s=>{const i=new Image();i.onload=i.onerror=bump;i.src=s});
+setTimeout(()=>document.getElementById('loader').classList.add('done'),3500); /* safety */
+/* ---------- marquee ---------- */
+const words='FREE SHIPPING OVER $75 ✦ 30-DAY RETURNS ✦ HEAVYWEIGHT ONLY ✦ NEW DROP FW26 ✦ ';
+document.getElementById('marqTr').innerHTML=('<span>'+words+'</span>').repeat(6).replaceAll('✦','<i>✦</i>');
+/* ---------- rail (pinned horizontal, lerped) ---------- */
+const track=document.getElementById('railTrack');
+track.innerHTML=`<article class="rcard intro"><h3>One pack.<br>Four essentials.</h3><p>Hoodie + Tee + Cap + Duffel. Bought separately: $${PACK_OLD}. As a pack:</p><div class="save">$${PACK_PRICE}</div><p style="margin-top:1rem"><button class="add" data-pack="1" style="padding:.8rem 1.4rem;font-size:.85rem">Add the pack</button></p></article>`+
+PRODUCTS.map(p=>`<article class="rcard"><div class="ph"><img src="${p.img}" alt="${p.name}"></div><div class="in"><h3>${p.name}</h3><div class="p"><span><span class="old">$${Math.round(p.price*1.3)}</span><span class="price">$${p.price}</span></span><button class="add" data-add="${p.id}">ADD +</button></div></div></article>`).join('');
+const railWrap=document.getElementById('railWrap'),railBar=document.getElementById('railBar');
+let railCur=0;
+function railTarget(){const r=railWrap.getBoundingClientRect();const total=railWrap.offsetHeight-innerHeight;return Math.min(1,Math.max(0,-r.top/total))}
+/* ---------- grid cards (slide + spin on entry) ---------- */
+const grid=document.getElementById('grid');
+grid.innerHTML=PRODUCTS.map((p,i)=>`<article class="pcard" data-rot="${i%2?1:-1}">
+  <div class="ph"><img src="${p.img}" alt="${p.name}"><span class="badge">${p.badge}</span></div>
+  <div class="in"><h3>${p.name}</h3><div class="col">${p.col}</div>
+  <div class="row"><span class="price">$${p.price}</span>
+  <span class="sizes" data-sizes="${p.id}">${p.sizes.map((s,j)=>`<button class="${j===1||p.sizes.length===1?'on':''}" data-size="${s}">${s}</button>`).join('')}</span></div>
+  <div class="row"><button class="addB" data-add="${p.id}">Add to bag</button><span style="color:var(--mut);font-size:.82rem">★★★★★ 4.9</span></div></div></article>`).join('');
+grid.addEventListener('click',e=>{const b=e.target.closest('[data-size]');if(!b)return;[...b.parentElement.children].forEach(x=>x.classList.remove('on'));b.classList.add('on')});
+/* ---------- cart ---------- */
+let cart=[];
+const drawer=document.getElementById('drawer'),scrim=document.getElementById('scrim');
+function openCart(){drawer.classList.add('on');scrim.classList.add('on')}
+function closeCart(){drawer.classList.remove('on');scrim.classList.remove('on')}
+document.getElementById('cartBtn').onclick=openCart;
+document.getElementById('drawerX').onclick=closeCart;scrim.onclick=closeCart;
+function renderCart(){
+  document.getElementById('cartCount').textContent=cart.reduce((s,c)=>s+c.q,0);
+  const box=document.getElementById('items');
+  if(!cart.length){box.innerHTML='<div class="empty">Your bag is empty.<br>Add something heavy.</div>'}
+  else box.innerHTML=cart.map((c,i)=>`<div class="ci"><img src="${c.img}" alt=""><div><h4>${c.name}</h4><div class="sz">Size ${c.size}</div>
+    <div class="qty"><button data-q="${i}|-1">−</button><span>${c.q}</span><button data-q="${i}|1">+</button></div>
+    <button class="rm" data-rm="${i}">Remove</button></div><div class="pr">$${c.price*c.q}</div></div>`).join('');
+  document.getElementById('totVal').textContent='$'+cart.reduce((s,c)=>s+c.price*c.q,0);
+}
+function addToCart(id,size){
+  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
+  size=size||(document.querySelector(`[data-sizes="${id}"] .on`)||{}).dataset?.size||p.sizes[0];
+  const ex=cart.find(c=>c.id===id&&c.size===size);
+  ex?ex.q++:cart.push({id,name:p.name,price:p.price,img:p.img,size,q:1});
+  renderCart();openCart();
+}
+document.addEventListener('click',e=>{
+  const a=e.target.closest('[data-add]');if(a){addToCart(a.dataset.add);return}
+  if(e.target.closest('[data-pack]')){let acc=0;PRODUCTS.forEach((p,i)=>{const pr=i<PRODUCTS.length-1?Math.round(p.price/PACK_OLD*PACK_PRICE):PACK_PRICE-acc;acc+=pr;const ex=cart.find(c=>c.id==='pack-'+p.id);ex?ex.q++:cart.push({id:'pack-'+p.id,name:p.name+' (Pack)',price:pr,img:p.img,size:p.sizes[p.sizes.length>1?1:0],q:1})});renderCart();openCart();return}
+  const q=e.target.closest('[data-q]');if(q){const[i,d]=q.dataset.q.split('|');cart[+i].q+=+d;if(cart[+i].q<1)cart.splice(+i,1);renderCart();return}
+  const r=e.target.closest('[data-rm]');if(r){cart.splice(+r.dataset.rm,1);renderCart()}
+});
+document.getElementById('checkout').onclick=()=>{document.getElementById('coMsg').textContent=cart.length?'Demo checkout — this concept store does not take real payments yet.':'Your bag is empty.'};
+renderCart();
+/* ---------- reveals + counters ---------- */
+const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');
+  en.target.querySelectorAll?.('[data-count]').forEach(runCount);if(en.target.dataset.count)runCount(en.target);io.unobserve(en.target)}}),{threshold:.25});
+document.querySelectorAll('.rv,.stat').forEach(el=>io.observe(el));
+function runCount(el){if(el._done)return;el._done=1;const T=+el.dataset.count,t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1300);el.textContent=Math.round(T*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0)}
+/* card entry observer (slide direction + spin handled in rAF via progress) */
+const cardIO=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target._vis=1;cardIO.unobserve(en.target)}}),{threshold:.12});
+document.querySelectorAll('.pcard').forEach(c=>cardIO.observe(c));
+/* ---------- main rAF motion engine ---------- */
+const heroCard=document.getElementById('heroCard'),giant=document.getElementById('giant'),paras=document.querySelectorAll('[data-para]'),sprog=document.getElementById('sprog');
+let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY});
+const cards=[...document.querySelectorAll('.pcard')].map(el=>({el,cur:0,dir:+el.dataset.rot}));
+(function loop(){
+  /* horizontal rail */
+  const t=railTarget();railCur+=(t-railCur)*.085;
+  const maxX=Math.max(0,track.scrollWidth-innerWidth+parseFloat(getComputedStyle(document.body).fontSize)*1);
+  track.style.transform=`translateX(${-railCur*maxX}px)`;railBar.style.width=(railCur*100)+'%';
+  /* hero parallax + tilt */
+  const hs=Math.min(1,scrollY/innerHeight);
+  heroCard.style.transform=`translateY(${hs*46}px) rotate(${hs*-2.2}deg) scale(${1-hs*.04})`;
+  /* giant outline text drift */
+  giant.style.transform=`translateX(${40-(scrollY*.06%60)}%)`;
+  /* lookbook parallax */
+  paras.forEach(im=>{const r=im.parentElement.getBoundingClientRect();const p=(r.top+r.height/2-innerHeight/2)/innerHeight;im.style.transform=`translateY(${p*-9}%) scale(1.02)`});
+  /* grid cards: entry slide + scroll-linked spin */
+  cards.forEach(c=>{const target=c.el._vis?1:0;c.cur+=(target-c.cur)*.07;
+    const r=c.el.getBoundingClientRect();const mid=(r.top+r.height/2-innerHeight/2)/innerHeight; /* -0.5..0.5 */
+    const x=(1-c.cur)*120*c.dir, rot=(1-c.cur)*10*c.dir + mid*-3.5;
+    c.el.style.opacity=c.cur;c.el.style.transform=`translateX(${x}px) rotate(${rot}deg)`});
+  /* progress + cursor */
+  const dh=document.documentElement.scrollHeight-innerHeight;
+  sprog.style.width=(scrollY/dh*100)+'%';
+  cx+=(mx-cx)*.2;cy+=(my-cy)*.2;
+  cur.style.transform=`translate(${mx-4}px,${my-4}px)`;curR.style.transform=`translate(${cx-18}px,${cy-18}px)`;
+  requestAnimationFrame(loop);
+})();
+/* newsletter */
+document.getElementById('nlForm').addEventListener('submit',e=>{e.preventDefault();const v=document.getElementById('nlMail').value;
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){document.getElementById('nlMail').style.borderColor='#e5484d';return}
+  document.getElementById('nlOk').style.display='block';e.target.reset()});
+</script>
+</body>
+</html>
